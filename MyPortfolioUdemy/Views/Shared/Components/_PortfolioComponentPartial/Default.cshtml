@@ -1,0 +1,57 @@
+﻿@model List<MyPortfolioUdemy.DAL.Entities.Portfolio>
+<section id="works" class="s-works target-section">
+
+    <div class="row narrow section-intro has-bottom-sep">
+        <div class="col-full">
+            <h3>Portfolyo</h3>
+            <h1>Son Projolerime Göz Atabilirsiniz</h1>
+
+            <p class="Bu bölümde, üzerinde çalıştığım projeleri bulabilirsiniz. Her bir proje, belirli bir sorunu çözmeyi, yenilikçi bir fikri hayata geçirmeyi veya kişisel gelişimime katkıda bulunmayı hedeflemektedir. Projelerim, yazılım geliştirme, tasarım, veri analitiği gibi farklı alanlarda yer almakta olup, teknik bilgi ve yaratıcılığı bir araya getirerek değer üretmeyi amaçlamaktadır.
+               Her projeye ait detaylar, kullanılan teknolojiler ve süreçlerle ilgili bilgilerle birlikte sunulmuştur. İlginizi çeken bir proje hakkında daha fazla bilgi almak veya iş birliği yapmak için lütfen benimle iletişime geçmekten çekinmeyin!</p>
+        </div>
+    </div>
+
+    <div class="row masonry-wrap">
+        <div class="masonry">
+                    @foreach (var item in Model)
+                    {
+
+
+                <div class="masonry__brick">
+                    <div class="item-folio">
+
+                        <div class="item-folio__thumb">
+                            <a href="@item.ImageUrl" class="thumb-link" title="@item.Title" data-size="1050x700">
+                                <img src="@item.ImageUrl"
+                                     srcset="@item.ImageUrl 1x, @item.ImageUrl 2x" alt="">
+                                <span class="shadow-overlay"></span>
+                            </a>
+                        </div>
+
+                        <div class="item-folio__text">
+                            <h3 class="item-folio__title">
+                                        @item.Title
+                            </h3>
+                            <p class="item-folio__cat">
+                                        @item.SubTitle
+                            </p>
+                        </div>
+
+                        <a href="@item.Url" target="_blank" class="item-folio__project-link" title="Proje Linki"
+                           onclick="event.stopPropagation();">
+                            <i class="im im-link"></i>
+                        </a>
+
+
+                        <div class="item-folio__caption">
+                            <p>@item.Description</p>
+                        </div>
+
+                    </div> <!-- end item-folio -->
+                </div> <!-- end masonry__brick -->
+                    }
+
+        </div>
+    </div> <!-- end masonry -->
+
+</section>

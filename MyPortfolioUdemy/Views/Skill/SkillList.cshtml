@@ -1,0 +1,96 @@
+﻿@model List<Skill>
+@{
+	ViewData["Title"] = "SkillList";
+	Layout = "~/Views/Layout/Index.cshtml";
+
+}
+@{/*  Bu blok Razor kod bloğudur. Razor, ASP.NET MVC'nin bir parçası olarak sunucu tarafında çalıştırılacak C# kodlarını HTML ile birlikte yazmanıza olanak tanır. Bu blok içinde yazılan kodlar sunucuda çalıştırılır ve çıktıları istemciye gönderilir. */
+	string renk = ""; /* Kullanıcı arayüzünde dinamik olarak renklendirme yapılması için. */
+	string labelrenk = "";
+	int count = 0; /* Bir döngü veya işlemde adım sayısını izlemek için. */
+}
+
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Yetenekler</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Yetenekler Listesi</div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							Yetenekler ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz.
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Başlık</th>
+									<th scope="col">Oran</th>
+									<th scope="col">Değer</th>
+									<th scope="col">Sil</th>
+									<th scope="col">Güncelle</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var x in Model)
+								{
+									count++;
+									if (x.Value >= 0 && x.Value <= 50)
+									{
+										renk = "progress-bar bg-danger";
+										labelrenk = "badge bg-danger";
+
+									}
+									else if (x.Value >= 51 && x.Value <= 70)
+									{
+										renk = "progress-bar bg-warning";
+										labelrenk = "badge bg-warning";
+
+									}
+									else if (x.Value >= 71 && x.Value <= 84)
+									{
+										renk = "progress-bar bg-primary";
+										labelrenk = "badge bg-primary";
+
+									}
+									else if (x.Value >= 85 && x.Value <= 100)
+									{
+										renk = "progress-bar bg-success";
+										labelrenk = "badge bg-success";
+
+									}
+
+									<tr>
+										<td>@count</td>
+										<td>@x.Title</td>
+										<td>
+											<div class="progress progress-xs">
+												<div class="@renk" style="width:@x.Value%"></div>
+											</div>
+										</td>
+										<td><span class="@labelrenk text-white">@x.Value%</span></td>
+
+
+
+										<td><a href="/Skill/DeleteSkill/@x.SkillId" class="btn btn-danger">Sil</a></td>
+										<td><a href="/Skill/UpdateSkill/@x.SkillId" class="btn btn-success">Güncelle</a></td>
+
+									</tr>
+
+								}
+
+							</tbody>
+						</table>
+						<a href="/Skill/CreateSkill" class="btn btn-primary">Yeni Yetenek Girişi</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
